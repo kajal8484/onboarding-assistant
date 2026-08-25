@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class DocumentIngestionService {
@@ -21,15 +22,20 @@ public class DocumentIngestionService {
         this.vectorStore = vectorStore;
     }
 
-    public int ingest(MultipartFile file) throws IOException {
+    public int ingest(
+            MultipartFile file,
+            UUID documentId,
+            String uploadedBy
+    ) throws IOException {
 
-        // Temporary local copy because the PDF reader needs a Resource.
-        File tempFile = File.createTempFile("onboarding-", ".pdf");
+        File tempFile = File.createTempFile(
+                "onboarding-",
+                ".pdf"
+        );
 
         try {
             file.transferTo(tempFile);
 
-            // 1. Read PDF
             PagePdfDocumentReader reader =
                     new PagePdfDocumentReader(
                             new FileSystemResource(tempFile)
@@ -37,7 +43,6 @@ public class DocumentIngestionService {
 
             List<Document> documents = reader.get();
 
-            // 2. Add our own metadata
             documents.forEach(document -> {
                 document.getMetadata().put(
                         "source",
@@ -45,19 +50,22 @@ public class DocumentIngestionService {
                 );
 
                 document.getMetadata().put(
-                        "type",
-                        "pdf"
+                        "documentId",
+                        documentId.toString()
+                );
+
+                document.getMetadata().put(
+                        "uploadedBy",
+                        uploadedBy
                 );
             });
 
-            // 3. Break large text into smaller chunks
             TokenTextSplitter splitter =
                     new TokenTextSplitter();
 
             List<Document> chunks =
                     splitter.apply(documents);
 
-            // 4. Embeddings are generated and stored in PGVector
             vectorStore.add(chunks);
 
             return chunks.size();
