@@ -76,7 +76,10 @@ function DocumentPanel() {
     };
 
     return (
-        <section className="document-panel">
+        <section
+            id="documents-section"
+            className="document-panel"
+        >
             <div className="panel-heading">
                 <div>
                     <h3>Knowledge Base</h3>

@@ -86,7 +86,10 @@ function ChatWindow() {
     };
 
     return (
-        <div className="chat-window">
+        <div
+            id="chat-section"
+            className="chat-window"
+        >
             <div className="chat-header">
                 <div className="ai-avatar">AI</div>
 

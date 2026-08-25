@@ -6,10 +6,19 @@ import {
 } from "lucide-react";
 
 function Sidebar({ user }) {
+
+    const scrollTo = (id) => {
+        document
+            .getElementById(id)
+            ?.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+    };
+
     return (
         <aside className="sidebar">
 
-            {/* Logo */}
             <div className="brand">
                 <div className="brand-icon">✣</div>
 
@@ -19,20 +28,31 @@ function Sidebar({ user }) {
                 </div>
             </div>
 
-            {/* Navigation */}
             <nav className="nav">
 
-                <button className="nav-item active">
+                <button
+                    className="nav-item active"
+                    onClick={() => window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    })}
+                >
                     <Home size={17} />
                     <span>Home</span>
                 </button>
 
-                <button className="nav-item">
+                <button
+                    className="nav-item"
+                    onClick={() => scrollTo("chat-section")}
+                >
                     <MessageCircle size={17} />
                     <span>Chat</span>
                 </button>
 
-                <button className="nav-item">
+                <button
+                    className="nav-item"
+                    onClick={() => scrollTo("documents-section")}
+                >
                     <FileText size={17} />
                     <span>Documents</span>
                 </button>
@@ -44,7 +64,6 @@ function Sidebar({ user }) {
 
             </nav>
 
-            {/* Logged-in Google User */}
             <div className="sidebar-profile">
 
                 {user?.picture ? (
@@ -61,13 +80,8 @@ function Sidebar({ user }) {
                 )}
 
                 <div className="profile-details">
-                    <strong>
-                        {user?.name || "User"}
-                    </strong>
-
-                    <span>
-            {user?.email || "Employee"}
-          </span>
+                    <strong>{user?.name || "User"}</strong>
+                    <span>{user?.email || "Employee"}</span>
                 </div>
 
             </div>
