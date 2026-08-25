@@ -31,11 +31,25 @@ function ChatWindow() {
             const response = await fetch(
                 `http://localhost:8080/api/chat?message=${encodeURIComponent(
                     currentMessage
-                )}`
+                )}`,
+                {
+                    method: "GET",
+                    credentials: "include"
+                }
             );
 
             if (!response.ok) {
-                throw new Error("Request failed");
+                const errorText = await response.text();
+
+                console.error(
+                    "Chat request failed:",
+                    response.status,
+                    errorText
+                );
+
+                throw new Error(
+                    `Chat request failed: ${response.status}`
+                );
             }
 
             const answer = await response.text();
@@ -47,7 +61,11 @@ function ChatWindow() {
                     text: answer
                 }
             ]);
+
         } catch (error) {
+
+            console.error("Chat error:", error);
+
             setMessages((previous) => [
                 ...previous,
                 {
@@ -56,7 +74,6 @@ function ChatWindow() {
                 }
             ]);
 
-            console.error(error);
         } finally {
             setLoading(false);
         }

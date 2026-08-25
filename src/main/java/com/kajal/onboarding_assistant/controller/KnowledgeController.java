@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/knowledge")
-@CrossOrigin(origins = "http://localhost:5173")
+
 public class KnowledgeController {
 
     private final KnowledgeService knowledgeService;

@@ -39,7 +39,8 @@ function DocumentPanel() {
                 "http://localhost:8080/api/documents/upload",
                 {
                     method: "POST",
-                    body: formData
+                    body: formData,
+                    credentials: "include"
                 }
             );
 

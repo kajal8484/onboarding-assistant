@@ -1,18 +1,17 @@
 import {
-    House,
+    Home,
     MessageCircle,
     FileText,
-    Settings,
-    Sparkles
+    Settings
 } from "lucide-react";
 
 function Sidebar({ user }) {
     return (
         <aside className="sidebar">
+
+            {/* Logo */}
             <div className="brand">
-                <div className="brand-logo">
-                    <Sparkles size={19} />
-                </div>
+                <div className="brand-icon">✣</div>
 
                 <div>
                     <h2>Onboardly</h2>
@@ -20,38 +19,59 @@ function Sidebar({ user }) {
                 </div>
             </div>
 
+            {/* Navigation */}
             <nav className="nav">
+
                 <button className="nav-item active">
-                    <House size={18} />
-                    Home
+                    <Home size={17} />
+                    <span>Home</span>
                 </button>
 
                 <button className="nav-item">
-                    <MessageCircle size={18} />
-                    Chat
+                    <MessageCircle size={17} />
+                    <span>Chat</span>
                 </button>
 
                 <button className="nav-item">
-                    <FileText size={18} />
-                    Documents
+                    <FileText size={17} />
+                    <span>Documents</span>
                 </button>
 
                 <button className="nav-item">
-                    <Settings size={18} />
-                    Settings
+                    <Settings size={17} />
+                    <span>Settings</span>
                 </button>
+
             </nav>
 
+            {/* Logged-in Google User */}
             <div className="sidebar-profile">
-                <div className="profile-avatar">
-                    {user.name.charAt(0)}
+
+                {user?.picture ? (
+                    <img
+                        src={user.picture}
+                        alt={user.name || "User"}
+                        className="profile-image"
+                        referrerPolicy="no-referrer"
+                    />
+                ) : (
+                    <div className="profile-avatar">
+                        {user?.name?.charAt(0)?.toUpperCase() || "U"}
+                    </div>
+                )}
+
+                <div className="profile-details">
+                    <strong>
+                        {user?.name || "User"}
+                    </strong>
+
+                    <span>
+            {user?.email || "Employee"}
+          </span>
                 </div>
 
-                <div>
-                    <strong>{user.name}</strong>
-                    <span>Employee</span>
-                </div>
             </div>
+
         </aside>
     );
 }

@@ -180,6 +180,69 @@ body {
     font-size: 9px;
     color: #968d9d;
 }
+.sidebar-profile {
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.profile-image,
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+.profile-image {
+    object-fit: cover;
+}
+
+.profile-avatar {
+    display: grid;
+    place-items: center;
+
+    background: #ebe3ff;
+    color: #7659dc;
+
+    font-weight: 700;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.profile-details strong {
+    font-size: 11px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.profile-details span {
+    margin-top: 2px;
+
+    color: #968c9c;
+    font-size: 8px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 
 
 /* ----------------
@@ -742,9 +805,9 @@ body {
 @media (max-width: 950px) {
 
     .sidebar {
-        display: none;
+        display: flex;
+        flex-direction: column;
     }
-
     .dashboard-content {
         grid-template-columns: 1fr;
     }
@@ -854,4 +917,66 @@ body {
 .document-ready {
     color: #64b58a;
     flex-shrink: 0;
+}
+.profile-image {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.login-page {
+    min-height: 100vh;
+
+    display: grid;
+    place-items: center;
+
+    background:
+            radial-gradient(circle at 20% 20%, #eee5ff, transparent 35%),
+            linear-gradient(135deg, #fff7f3, #f6f2ff);
+}
+
+.login-card {
+    width: 390px;
+
+    padding: 48px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+            0 20px 60px rgba(87, 67, 120, 0.12);
+}
+
+.login-card h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+.login-card p {
+    margin: 12px 0 28px;
+
+    color: #84798d;
+
+    font-size: 13px;
+}
+
+.google-login-button {
+    display: block;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background:
+            linear-gradient(135deg, #7659dc, #9d83ef);
+
+    font-size: 13px;
+    font-weight: 600;
 }
