@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: onboarding-postgres
+
+    environment:
+      POSTGRES_DB: onboarding
+      POSTGRES_USER: onboarding
+      POSTGRES_PASSWORD: onboarding
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - onboarding_pg_data:/var/lib/postgresql/data
+
+volumes:
+  onboarding_pg_data:
