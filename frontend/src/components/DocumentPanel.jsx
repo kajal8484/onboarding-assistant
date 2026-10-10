@@ -9,8 +9,16 @@ function DocumentPanel() {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
-    const openFilePicker = () => {
+    const openFilePicker = (event) => {
+        event?.stopPropagation();
         fileInputRef.current?.click();
+    };
+
+    const handleUploadKeyDown = (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openFilePicker(event);
+        }
     };
 
     const handleFileChange = async (event) => {
@@ -91,7 +99,14 @@ function DocumentPanel() {
         </span>
             </div>
 
-            <div className={`upload-area ${uploading ? "uploading" : ""}`}>
+            <div
+                className={`upload-area ${uploading ? "uploading" : ""}`}
+                onClick={!uploading ? openFilePicker : undefined}
+                onKeyDown={!uploading ? handleUploadKeyDown : undefined}
+                role="button"
+                tabIndex={uploading ? -1 : 0}
+                aria-label="Upload a PDF document"
+            >
                 <input
                     ref={fileInputRef}
                     type="file"
@@ -121,6 +136,7 @@ function DocumentPanel() {
         </span>
 
                 <button
+                    type="button"
                     onClick={openFilePicker}
                     disabled={uploading}
                 >
@@ -145,11 +161,12 @@ function DocumentPanel() {
             <div className="document-list">
                 {documents.length === 0 ? (
                     <div className="empty-documents">
-                        <FileText size={22} />
+                        <div className="empty-document-doodle">
+                            <FileText size={24} />
+                        </div>
 
-                        <span>
-              Your knowledge base is empty.
-            </span>
+                        <strong>No notes yet</strong>
+                        <span>Upload a PDF to teach your assistant.</span>
                     </div>
                 ) : (
                     documents.map((document, index) => (

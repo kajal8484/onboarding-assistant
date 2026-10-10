@@ -47,7 +47,17 @@ public class SecurityConfig {
                                 "http://localhost:5173",
                                 true
                         )
-                );
+                )
+        .logout(logout -> logout
+                .logoutUrl("/api/auth/logout")
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(204);
+                })
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+        );
+
 
         return http.build();
     }

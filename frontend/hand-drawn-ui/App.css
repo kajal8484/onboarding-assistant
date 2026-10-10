@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Patrick+Hand&display=swap");
+
+:root {
+    --paper: #fffdf6;
+    --ink: #24221f;
+    --muted: #6f6a61;
+    --purple: #7656d8;
+    --purple-soft: #e9e0ff;
+    --yellow: #ffd95a;
+    --green: #74bd8b;
+    --line: #37332d;
+    --sketch-shadow: 5px 6px 0 rgba(55, 51, 45, 0.16);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-width: 320px;
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    background-color: #eee9dc;
+    background-image:
+        linear-gradient(rgba(85, 112, 154, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(85, 112, 154, .045) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+button, input, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.dashboard { min-height: 100vh; display: flex; gap: 24px; padding: 22px; }
+
+.sidebar {
+    position: sticky;
+    top: 22px;
+    width: 230px;
+    min-width: 230px;
+    height: calc(100vh - 44px);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 253, 246, .96);
+    border: 2px solid var(--line);
+    border-radius: 18px 24px 17px 22px / 20px 17px 23px 18px;
+    box-shadow: var(--sketch-shadow);
+    transform: rotate(-.15deg);
+}
+
+.brand { display: flex; align-items: center; gap: 11px; padding: 4px 6px 25px; border-bottom: 2px dashed rgba(55, 51, 45, .28); }
+.brand-icon, .brand-logo { width: 42px; height: 42px; display: grid; place-items: center; color: var(--ink); background: var(--yellow); border: 2px solid var(--line); border-radius: 46% 54% 49% 51% / 52% 43% 57% 48%; box-shadow: 3px 3px 0 rgba(55, 51, 45, .2); transform: rotate(-3deg); }
+.brand h2 { margin: 0; font-family: "Patrick Hand", cursive; font-size: 24px; line-height: 1; }
+.brand span { color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+
+.nav { display: flex; flex-direction: column; gap: 7px; padding-top: 24px; }
+.nav-item { width: 100%; padding: 11px 12px; display: flex; align-items: center; gap: 11px; color: var(--muted); border: 1.5px solid transparent; border-radius: 9px 13px 10px 12px; background: transparent; cursor: pointer; text-align: left; transition: transform .18s ease, background .18s ease; }
+.nav-item:hover { color: var(--ink); background: #f4eedc; transform: translateX(2px) rotate(-.2deg); }
+.nav-item.active { color: var(--ink); font-weight: 700; background: var(--purple-soft); border-color: var(--line); box-shadow: 2px 3px 0 rgba(55, 51, 45, .14); transform: rotate(-.4deg); }
+
+.sidebar-profile { margin-top: auto; padding: 12px; display: flex; align-items: center; gap: 10px; background: #f7f1e3; border: 1.5px solid var(--line); border-radius: 12px 10px 13px 9px; transform: rotate(.35deg); }
+.profile-image, .profile-avatar { width: 38px; height: 38px; flex-shrink: 0; border: 1.5px solid var(--line); border-radius: 50%; }
+.profile-image { object-fit: cover; }
+.profile-avatar { display: grid; place-items: center; background: var(--yellow); font-weight: 700; }
+.profile-details { min-width: 0; display: flex; flex-direction: column; }
+.profile-details strong, .profile-details span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.profile-details strong { font-size: 12px; }
+.profile-details span { margin-top: 2px; color: var(--muted); font-size: 9px; }
+
+.main-content { width: 100%; max-width: 1420px; margin: 0 auto; }
+.welcome-card { position: relative; min-height: 210px; padding: 34px 40px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; background: var(--paper); border: 2px solid var(--line); border-radius: 18px 24px 16px 22px / 21px 17px 23px 18px; box-shadow: var(--sketch-shadow); }
+.welcome-card::before { content: ""; position: absolute; left: 37px; top: 72px; width: 285px; height: 17px; background: rgba(255, 217, 90, .55); transform: rotate(-1.5deg); z-index: 0; }
+.welcome-content { position: relative; z-index: 1; }
+.welcome-label { display: inline-flex; align-items: center; gap: 7px; color: var(--purple); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+.welcome-content h1 { margin: 10px 0 8px; font-family: "Patrick Hand", cursive; font-size: clamp(34px, 4vw, 48px); line-height: .98; font-weight: 400; }
+.welcome-content p { max-width: 550px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.welcome-nudge { margin-top: 18px; display: inline-flex; align-items: center; gap: 4px; font-family: "Patrick Hand", cursive; font-size: 16px; transform: rotate(-2deg); }
+
+.assistant-art { position: relative; width: 180px; height: 150px; display: grid; place-items: center; margin-right: 30px; }
+.assistant-art::before { content: ""; position: absolute; inset: 8px 2px 4px 8px; background: var(--purple-soft); border: 2px solid var(--line); border-radius: 50% 46% 52% 44% / 43% 56% 45% 57%; transform: rotate(4deg); }
+.bot { position: relative; z-index: 2; animation: floatBot 4s ease-in-out infinite; }
+.bot-face { position: relative; width: 88px; height: 68px; display: flex; align-items: center; justify-content: center; gap: 16px; background: var(--paper); border: 2px solid var(--line); border-radius: 23px 18px 25px 19px; box-shadow: 4px 5px 0 rgba(55, 51, 45, .16); }
+.eye { width: 8px; height: 13px; border-radius: 50%; background: var(--ink); animation: blink 4s infinite; }
+.bot-smile { position: absolute; bottom: 13px; width: 20px; height: 8px; border-bottom: 2px solid var(--line); border-radius: 50%; }
+.bot-antenna { height: 24px; display: flex; justify-content: center; }
+.bot-antenna::before { content: ""; width: 2px; height: 17px; background: var(--line); transform: rotate(6deg); }
+.bot-antenna span { position: absolute; top: -2px; width: 9px; height: 9px; background: var(--yellow); border: 2px solid var(--line); border-radius: 50%; }
+.bot-shadow { position: absolute; z-index: 1; bottom: 15px; width: 92px; height: 12px; border: 2px solid var(--line); border-width: 2px 0 0; border-radius: 50%; }
+.doodle-star { position: absolute; z-index: 3; font-family: "Patrick Hand", cursive; }
+.star-one { top: 3px; right: -1px; color: var(--purple); font-size: 26px; transform: rotate(10deg); }
+.star-two { bottom: 15px; left: 5px; color: #d89435; font-size: 22px; }
+
+.dashboard-content { margin-top: 22px; display: grid; grid-template-columns: minmax(480px, 1.6fr) minmax(280px, .72fr); gap: 22px; }
+.chat-window, .document-panel { background: rgba(255, 253, 246, .97); border: 2px solid var(--line); box-shadow: var(--sketch-shadow); }
+.chat-window { height: 560px; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px 16px 23px 17px / 17px 22px 18px 24px; }
+.document-panel { min-height: 560px; padding: 22px; border-radius: 17px 22px 18px 24px / 21px 17px 23px 18px; transform: rotate(.12deg); }
+.chat-header { min-height: 78px; padding: 16px 20px; display: flex; align-items: center; gap: 11px; border-bottom: 2px dashed rgba(55, 51, 45, .25); }
+.ai-avatar { width: 42px; height: 42px; display: grid; place-items: center; color: var(--ink); background: var(--yellow); border: 2px solid var(--line); border-radius: 48% 52% 45% 55%; transform: rotate(-3deg); }
+.chat-header h3 { margin: 0 0 3px; font-size: 14px; }
+.chat-header span { display: flex; align-items: center; gap: 5px; color: var(--muted); font-size: 9px; }
+.chat-header span i { width: 7px; height: 7px; background: var(--green); border: 1px solid var(--line); border-radius: 50%; }
+.chat-sticker { margin-left: auto; padding: 5px 9px; display: flex; align-items: center; gap: 5px; color: #4f3b91; background: var(--purple-soft); border: 1.5px solid var(--line); border-radius: 7px 10px 8px 9px; font-family: "Patrick Hand", cursive; font-size: 13px; transform: rotate(2deg); }
+.messages { flex: 1; padding: 24px; overflow-y: auto; scroll-behavior: smooth; }
+.message-row { display: flex; margin-bottom: 15px; }
+.user-row { justify-content: flex-end; }
+.message { max-width: 76%; padding: 12px 15px; border: 1.5px solid var(--line); font-size: 12px; line-height: 1.55; white-space: pre-wrap; }
+.message.user { color: var(--ink); background: var(--yellow); border-radius: 15px 12px 4px 17px; box-shadow: 2px 3px 0 rgba(55, 51, 45, .13); transform: rotate(.15deg); }
+.message.ai { color: #4f4a43; background: var(--purple-soft); border-radius: 13px 17px 15px 4px; transform: rotate(-.12deg); }
+.suggestion-list { margin: 22px 0 4px; display: flex; flex-wrap: wrap; gap: 8px; }
+.suggestion-list > span { width: 100%; color: var(--muted); font-family: "Patrick Hand", cursive; font-size: 15px; }
+.suggestion-list button { padding: 8px 10px; color: var(--ink); background: transparent; border: 1.5px dashed rgba(55, 51, 45, .55); border-radius: 10px 7px 11px 8px; font-size: 10px; cursor: pointer; transition: transform .15s ease, background .15s ease; }
+.suggestion-list button:hover { background: #fff4bd; border-style: solid; transform: translateY(-2px) rotate(-.3deg); }
+.chat-input { margin: 14px; padding: 7px 7px 7px 14px; display: flex; align-items: flex-end; gap: 8px; background: #f8f3e8; border: 1.5px solid var(--line); border-radius: 12px 9px 14px 10px; box-shadow: inset 0 -2px rgba(55, 51, 45, .05); }
+.chat-input textarea { flex: 1; min-height: 40px; max-height: 100px; padding: 10px 0 7px; resize: none; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 12px; }
+.chat-input button { width: 41px; height: 41px; display: grid; place-items: center; flex-shrink: 0; color: white; background: var(--purple); border: 2px solid var(--line); border-radius: 10px 8px 11px 9px; box-shadow: 2px 2px 0 var(--line); cursor: pointer; transition: transform .15s ease, box-shadow .15s ease; }
+.chat-input button:hover:not(:disabled) { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--line); }
+.chat-input button:disabled { opacity: .42; cursor: not-allowed; box-shadow: none; }
+
+.panel-heading { display: flex; justify-content: space-between; align-items: flex-start; }
+.panel-heading h3 { margin: 0; font-family: "Patrick Hand", cursive; font-size: 23px; font-weight: 400; }
+.panel-heading p { margin: 3px 0 0; color: var(--muted); font-size: 9px; }
+.document-count { width: 30px; height: 30px; display: grid; place-items: center; color: var(--ink); background: var(--yellow); border: 1.5px solid var(--line); border-radius: 50% 45% 53% 47%; font-size: 11px; font-weight: 700; transform: rotate(5deg); }
+.upload-area { margin-top: 20px; padding: 23px 16px; display: flex; flex-direction: column; align-items: center; gap: 6px; background-color: #f7f2e6; background-image: repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(74, 103, 145, .08) 24px); border: 2px dashed rgba(55, 51, 45, .65); border-radius: 15px 11px 17px 13px; cursor: pointer; transition: transform .2s ease, background .2s ease; }
+.upload-area:hover:not(.uploading) { background-color: #fff8d8; transform: rotate(-.25deg); }
+.upload-icon { width: 43px; height: 43px; display: grid; place-items: center; color: var(--purple); background: var(--purple-soft); border: 1.5px solid var(--line); border-radius: 46% 54% 43% 57%; transform: rotate(-4deg); }
+.upload-area strong { margin-top: 4px; font-size: 11px; }
+.upload-area span { color: var(--muted); font-size: 9px; }
+.upload-area button { margin-top: 7px; padding: 8px 13px; color: white; background: var(--purple); border: 1.5px solid var(--line); border-radius: 8px 6px 9px 7px; box-shadow: 2px 2px 0 var(--line); font-size: 9px; cursor: pointer; }
+.upload-area button:disabled { opacity: .55; cursor: not-allowed; }
+.document-list { margin-top: 17px; display: flex; flex-direction: column; gap: 9px; }
+.document { padding: 11px; display: flex; align-items: center; gap: 9px; background: #faf5e9; border: 1.5px solid rgba(55, 51, 45, .45); border-radius: 9px 12px 8px 11px; }
+.document-icon { width: 33px; height: 33px; display: grid; place-items: center; color: var(--purple); background: var(--purple-soft); border: 1px solid var(--line); border-radius: 7px 10px 8px 9px; }
+.document-info { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.document-info strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; }
+.document-info span { margin-top: 3px; color: var(--muted); font-size: 8px; }
+.document-ready { color: #43885d; flex-shrink: 0; }
+.empty-documents { padding: 28px 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--muted); text-align: center; }
+.empty-document-doodle { width: 52px; height: 58px; display: grid; place-items: center; color: var(--purple); background: var(--purple-soft); border: 1.5px solid var(--line); border-radius: 7px 11px 8px 10px; box-shadow: 3px 3px 0 rgba(55, 51, 45, .14); transform: rotate(-4deg); }
+.empty-documents strong { margin-top: 5px; color: var(--ink); font-family: "Patrick Hand", cursive; font-size: 18px; font-weight: 400; }
+.empty-documents span { font-size: 9px; }
+
+.typing { display: flex; gap: 5px; }
+.typing span { width: 6px; height: 6px; background: #7f69bd; border-radius: 50%; animation: typingBounce 1.2s infinite; }
+.typing span:nth-child(2) { animation-delay: .15s; }
+.typing span:nth-child(3) { animation-delay: .3s; }
+.upload-area.uploading { background-color: #eee7ff; }
+.upload-spinner { width: 21px; height: 21px; border: 2px solid #cbbdf0; border-top-color: var(--purple); border-radius: 50%; animation: spin .8s linear infinite; }
+.upload-success, .upload-error { margin-top: 12px; padding: 9px 11px; display: flex; align-items: center; gap: 7px; border: 1.5px solid currentColor; border-radius: 8px 11px 7px 10px; font-size: 9px; animation: slideIn .3s ease; }
+.upload-success { color: #397553; background: #edf8ef; }
+.upload-error { color: #9d4c4c; background: #fff0ef; }
+
+.login-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; background-color: #eee9dc; background-image: linear-gradient(rgba(85,112,154,.08) 1px, transparent 1px); background-size: 100% 25px; }
+.login-card { position: relative; width: min(410px, 100%); padding: 48px 42px; text-align: center; background: var(--paper); border: 2px solid var(--line); border-radius: 19px 24px 17px 22px / 22px 18px 25px 17px; box-shadow: 7px 8px 0 rgba(55, 51, 45, .18); transform: rotate(-.3deg); }
+.login-card::before { content: "✦"; position: absolute; top: -20px; right: 25px; color: var(--purple); font-family: "Patrick Hand", cursive; font-size: 38px; }
+.login-card h1 { position: relative; z-index: 1; display: inline-block; margin: 0; font-family: "Patrick Hand", cursive; font-size: 46px; font-weight: 400; }
+.login-card h1::after { content: ""; position: absolute; z-index: -1; left: -5px; right: -5px; bottom: 5px; height: 12px; background: rgba(255,217,90,.65); transform: rotate(-2deg); }
+.login-card p { margin: 10px 0 28px; color: var(--muted); font-size: 13px; }
+.google-login-button { display: block; padding: 13px; color: white; background: var(--purple); border: 2px solid var(--line); border-radius: 10px 8px 12px 9px; box-shadow: 3px 3px 0 var(--line); text-decoration: none; font-size: 13px; font-weight: 600; transition: transform .15s ease, box-shadow .15s ease; }
+.google-login-button:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--line); }
+
+@keyframes floatBot { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-7px) rotate(1deg); } }
+@keyframes blink { 0%, 46%, 50%, 100% { transform: scaleY(1); } 48% { transform: scaleY(.12); } }
+@keyframes typingBounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 980px) {
+    .dashboard { flex-direction: column; padding: 15px; }
+    .sidebar { position: static; width: 100%; min-width: 0; height: auto; padding: 12px 14px; flex-direction: row; align-items: center; transform: none; }
+    .brand { min-width: 190px; padding: 0 16px 0 0; border: 0; }
+    .nav { flex: 1; padding: 0; flex-direction: row; justify-content: center; }
+    .nav-item { width: auto; }
+    .sidebar-profile { margin: 0 0 0 10px; }
+    .profile-details { display: none; }
+    .dashboard-content { grid-template-columns: 1fr; }
+    .document-panel { min-height: auto; }
+}
+
+@media (max-width: 680px) {
+    .dashboard { gap: 15px; padding: 10px; }
+    .sidebar { overflow-x: auto; }
+    .brand { min-width: auto; padding-right: 10px; }
+    .brand h2 { font-size: 21px; }
+    .brand span, .nav-item span, .sidebar-profile { display: none; }
+    .nav { justify-content: flex-end; }
+    .nav-item { padding: 10px; }
+    .welcome-card { min-height: 190px; padding: 28px 24px; }
+    .welcome-card::before { left: 20px; top: 65px; width: 240px; }
+    .welcome-content h1 { font-size: 36px; }
+    .assistant-art { display: none; }
+    .chat-window { height: 600px; }
+    .chat-sticker { display: none; }
+    .messages { padding: 18px 15px; }
+    .message { max-width: 88%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

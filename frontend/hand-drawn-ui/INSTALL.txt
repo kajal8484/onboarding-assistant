@@ -1,0 +1,13 @@
+HAND-DRAWN ONBOARDING UI
+
+1. Extract this ZIP.
+2. Copy App.css to:
+   frontend/src/App.css
+3. Copy the four JSX files to:
+   frontend/src/components/
+4. From the frontend directory run:
+   npm install
+   npm run dev
+
+The files preserve the current section IDs, smooth-scroll navigation,
+Google user details, chat API request, PDF upload flow, and dynamic greeting.

@@ -1,4 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Bot, Send, Sparkles } from "lucide-react";
+
+const suggestions = [
+    "What should I do on my first day?",
+    "How do I request IT access?",
+    "Explain the leave policy"
+];
 
 function ChatWindow() {
     const [message, setMessage] = useState("");
@@ -10,6 +17,11 @@ function ChatWindow() {
     ]);
 
     const [loading, setLoading] = useState(false);
+    const messagesEndRef = useRef(null);
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages, loading]);
 
     const sendMessage = async () => {
         if (!message.trim() || loading) return;
@@ -80,7 +92,8 @@ function ChatWindow() {
     };
 
     const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
             sendMessage();
         }
     };
@@ -91,11 +104,15 @@ function ChatWindow() {
             className="chat-window"
         >
             <div className="chat-header">
-                <div className="ai-avatar">AI</div>
+                <div className="ai-avatar"><Bot size={21} /></div>
 
                 <div>
                     <h3>Onboarding Assistant</h3>
-                    <span>● Online</span>
+                    <span><i /> Ready to help</span>
+                </div>
+
+                <div className="chat-sticker">
+                    <Sparkles size={13} /> AI powered
                 </div>
             </div>
 
@@ -124,18 +141,42 @@ function ChatWindow() {
                         </div>
                     </div>
                 )}
+
+                {messages.length === 1 && !loading && (
+                    <div className="suggestion-list" aria-label="Suggested questions">
+                        <span>Try asking</span>
+                        {suggestions.map((suggestion) => (
+                            <button
+                                key={suggestion}
+                                type="button"
+                                onClick={() => setMessage(suggestion)}
+                            >
+                                {suggestion}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                <div ref={messagesEndRef} />
             </div>
 
             <div className="chat-input">
-                <input
+                <textarea
                     value={message}
                     onChange={(event) => setMessage(event.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Ask anything about onboarding..."
+                    rows={1}
+                    aria-label="Message"
                 />
 
-                <button onClick={sendMessage} disabled={loading}>
-                    ➜
+                <button
+                    type="button"
+                    onClick={sendMessage}
+                    disabled={loading || !message.trim()}
+                    aria-label="Send message"
+                >
+                    <Send size={18} />
                 </button>
             </div>
         </div>
